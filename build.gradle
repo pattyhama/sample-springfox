@@ -26,14 +26,14 @@ repositories {
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.21'
-    compile "org.springframework.boot:spring-boot-starter-web:1.3.0.RELEASE"
+    compile "org.springframework.boot:spring-boot-starter-web:2.0.5.RELEASE"
     // Add dependencies to create document by swagger
     compile 'io.springfox:springfox-swagger2:2.9.2'
     compile 'io.springfox:springfox-swagger-ui:2.9.2'
     // Use Guava to specify API's entrypoint by regular expression
     compile "com.google.guava:guava:17.0"
     compile "org.projectlombok:lombok:1.16.4"
-    testCompile "org.springframework.boot:spring-boot-starter-test:1.3.0.RELEASE"
+    testCompile "org.springframework.boot:spring-boot-starter-test:2.0.5.RELEASE"
     testCompile 'junit:junit:4.12'
     testCompile "com.h2database:h2"    
 }

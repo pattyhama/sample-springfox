@@ -1,34 +1,49 @@
 package springFox;
 
-import com.google.common.base.Predicate;
+import java.util.ArrayList;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.service.VendorExtension;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import static com.google.common.base.Predicates.*;
-
+import io.swagger.annotations.ApiOperation;
 
 @Configuration
-@EnableSwagger2  // Springfoxを使用可能にするためのアノテーション
- public class AppConfig {
-
+@EnableSwagger2  // Annotation to enable Springfox usage
+public class AppConfig {
     @Bean
     public Docket document() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .select().paths(paths()).build().apiInfo(apiInfo());
+        		.groupName("sample-api")	// Identification to group API document
+                .select()
+                .paths(paths())
+                .build()
+                .apiInfo(apiInfo());
     }
-
-
     private Predicate<String> paths() {
-        return or(containsPattern("/api*"));  //APIのエントリポイントを正規表現で指定
+    	// Specify API URL which is the target for document creation
+    	// In this case, "/user" is
+        return Predicates.or(Predicates.containsPattern("/user"));
     }
-
+    // APIの基本情報を定義
     private ApiInfo apiInfo() {
-        ApiInfo apiInfo = new ApiInfo("Sample API", "",
-                "terms of service", "", "", "", "");
-        return apiInfo;
+        return new ApiInfo(
+                "Sample API"  // APIのタイトル
+              , "このAPIは～～～～です"  // APIの説明
+              , "V1"  // APIのバージョン
+              , "????"    // よくわからない
+              , new Contact(
+                       "株式会社XXXXXXX"      // APIに関する連絡先組織・団体等
+                      ,"http://XXXXXXXXXXX.co.jp" // APIに関する連絡先組織・団体等のWeb Site Url
+                      ,"XXXXXXXX@example.jp")     // APIに関する連絡先組織・団体等のメールアドレス
+              , "API LICENSE" // APIのライセンス
+              , "http://XXXXXXXXXXXX.co.jp"   // APIのライセンスURL
+              , new ArrayList<VendorExtension>()  // 独自に拡張したいドキュメントがあればここで作成
+        );
     }
 }
