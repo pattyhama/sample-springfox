@@ -7,9 +7,12 @@ buildscript {
     }
 }
 
+plugins {
+	id 'org.springframework.boot' version '2.0.5.RELEASE'
+}
+
 apply plugin: "java"
 apply plugin: "eclipse"
-apply plugin: "spring-boot"
 
 jar {
     baseName = 'springFoxSample'
@@ -36,5 +39,5 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.1.3'
+    gradleVersion = '4.10.1'
 }
